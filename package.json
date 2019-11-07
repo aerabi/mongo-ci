@@ -1,0 +1,26 @@
+{
+  "name": "mongo-ci",
+  "version": "1.0.0",
+  "description": "Node.js MongoDB testing package",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aerabi/mongo-ci.git"
+  },
+  "keywords": [
+    "mongo",
+    "unit-testing",
+    "integration",
+    "tests",
+    "ci"
+  ],
+  "author": "Mohammad-Ali A'RÂBI <aerabi@gmx.de> (aerabi.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/aerabi/mongo-ci/issues"
+  },
+  "homepage": "https://github.com/aerabi/mongo-ci#readme"
+}
