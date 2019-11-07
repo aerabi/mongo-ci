@@ -4,6 +4,7 @@
   "description": "Node.js MongoDB testing package",
   "main": "index.js",
   "scripts": {
+    "prepublish": "tsc",
     "test": "npm test"
   },
   "repository": {
