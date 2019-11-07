@@ -2,9 +2,9 @@
   "name": "mongo-ci",
   "version": "1.0.0",
   "description": "Node.js MongoDB testing package",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "prepublish": "tsc",
     "test": "npm test"
   },
   "repository": {
