@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "test": "ls",
+    "test": "tsc && test -e dist && test -f dist/index.js && test -f dist/index.d.ts",
     "semantic-release": "semantic-release"
   },
   "repository": {
