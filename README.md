@@ -11,9 +11,10 @@ $ npm install -D mongo-ci
 import * as mongoCI from 'mongo-ci';
 
 describte('Repository Test', () => {
-  beforeAll(async () => await mongoCI.init(process.env.MONGO_HOST || 'localhost'));
-  beforeEach(async () => await mongoCI.load(mockData));
-  afterEach(async () => await mongoCI.drop());
+  beforeAll(async (done) => mongoCI.init(process.env.MONGO_HOST || 'localhost').then(done));
+  beforeEach(async (done) => mongoCI.load(mockData).then(done));
+  afterEach(async (done) => mongoCI.deleteAll().then(done));
+  afterAll(async (done) => mongoCI.drop().then(done));
 });
 ```
 

@@ -33,3 +33,14 @@ export async function drop(): Promise<void> {
     return MongoClient.connect(url.shortUrl)
         .then(client => client.db(url.dbName).dropDatabase().then(() => client.close()));
 }
+
+export async function deleteAll(): Promise<void> {
+    let _client: MongoClient;
+    return MongoClient.connect(url.shortUrl)
+        .then(client => _client = client)
+        .then(client => client.db(url.dbName).collections())
+        .then(cols => {
+            const queries = cols.map(col => col.deleteMany({}));
+            return Promise.all(queries).then(() => _client.close());
+        });
+}
