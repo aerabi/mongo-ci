@@ -1,15 +1,16 @@
 {
   "name": "mongo-ci",
-  "version": "1.1.0",
+  "version": "1.1.0-development",
   "description": "Node.js MongoDB testing package",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "test": "npm test"
+    "test": "ls",
+    "semantic-release": "semantic-release"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/aerabi/mongo-ci.git"
+    "url": "https://github.com/aerabi/mongo-ci.git"
   },
   "keywords": [
     "mongo",
@@ -27,5 +28,8 @@
   "dependencies": {
     "@types/mongodb": "^3.3.8",
     "mongodb": "^3.3.3"
+  },
+  "devDependencies": {
+    "semantic-release": "^15.13.30"
   }
 }
