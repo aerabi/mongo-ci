@@ -30,7 +30,6 @@
     "mongodb": "^3.3.3"
   },
   "devDependencies": {
-    "semantic-release": "^15.13.30",
     "typescript": "^3.7.2"
   }
 }
