@@ -1,11 +1,12 @@
 {
   "name": "mongo-ci",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Node.js MongoDB testing package",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "test": "tsc && test -e dist && test -f dist/index.js && test -f dist/index.d.ts",
+    "test:standalone": "ts-node node_modules/jasmine/bin/jasmine.js --filter=\"standalone\" index.spec.ts",
     "semantic-release": "semantic-release"
   },
   "repository": {
@@ -30,6 +31,10 @@
     "mongodb": "^3.3.3"
   },
   "devDependencies": {
+    "@types/jasmine": "^3.5.0",
+    "jasmine": "^3.5.0",
+    "mocha": "^6.2.2",
+    "ts-node": "^8.5.4",
     "typescript": "^3.7.2"
   }
 }
