@@ -4,8 +4,9 @@ export class MongoURL {
     shortUrl: string;
     longUrl: string;
 
-    constructor(public host: string, public port: number, public dbName: string) {
-        this.shortUrl = `mongodb://${host}:${port}`;
+    constructor(public host: string, public port: number, public dbName: string, public username?: string, public password?: string) {
+        const auth = (!!password ? `${username || 'root'}:${password}@` : '');
+        this.shortUrl = `mongodb://${auth}${host}:${port}`;
         this.longUrl = `${this.shortUrl}/${dbName}`;
     }
 }
@@ -15,7 +16,11 @@ let _options: MongoClientOptions = {};
 
 export async function init(host: string = 'localhost', port: number = 27017, dbName: string = 'test', options: MongoClientOptions = {}): Promise<MongoURL> {
     setOptions(options);
-    url = new MongoURL(host || 'localhost', port || 27017, dbName || 'test');
+    if (_options.auth) {
+        url = new MongoURL(host || 'localhost', port || 27017, dbName || 'test', _options.auth.user, _options.auth.password);
+    } else {
+        url = new MongoURL(host || 'localhost', port || 27017, dbName || 'test');
+    }
     return url;
 }
 

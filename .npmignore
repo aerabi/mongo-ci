@@ -1,4 +1,7 @@
 .idea/
 node_modules/
+.env
 .gitignore
 .travis.yml
+*.spec.ts
+docker-compose.yml

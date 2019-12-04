@@ -1,6 +1,50 @@
 version: "3.2"
 services:
-  mongo:
+  mongodb-standalone:
     image: mongo
     ports:
       - "27017:27017"
+  mongodb-primary:
+    image: 'bitnami/mongodb:4.0'
+    environment:
+      - MONGODB_ADVERTISED_HOSTNAME=mongodb-primary
+      - MONGODB_REPLICA_SET_MODE=primary
+      - MONGODB_ROOT_PASSWORD=${MONGO_PWD}
+      - MONGODB_REPLICA_SET_KEY=${MONGO_REPLICA_SET_KEY}
+      - MONGODB_USERNAME=test
+      - MONGODB_PASSWORD=${MONGO_PWD}
+      - MONGODB_DATABASE=test
+    volumes:
+      - 'mongodb_master_data:/bitnami'
+    ports:
+      - "27017:27017"
+  mongodb-secondary:
+    image: 'bitnami/mongodb:4.0'
+    depends_on:
+      - mongodb-primary
+    environment:
+      - MONGODB_ADVERTISED_HOSTNAME=mongodb-secondary
+      - MONGODB_REPLICA_SET_MODE=secondary
+      - MONGODB_PRIMARY_HOST=mongodb-primary
+      - MONGODB_PRIMARY_ROOT_PASSWORD=${MONGO_PWD}
+      - MONGODB_REPLICA_SET_KEY=${MONGO_REPLICA_SET_KEY}
+      - MONGODB_USERNAME=test
+      - MONGODB_PASSWORD=${MONGO_PWD}
+      - MONGODB_DATABASE=test
+  mongodb-arbiter:
+    image: 'bitnami/mongodb:4.0'
+    depends_on:
+      - mongodb-primary
+    environment:
+      - MONGODB_ADVERTISED_HOSTNAME=mongodb-arbiter
+      - MONGODB_REPLICA_SET_MODE=arbiter
+      - MONGODB_PRIMARY_HOST=mongodb-primary
+      - MONGODB_PRIMARY_ROOT_PASSWORD=${MONGO_PWD}
+      - MONGODB_REPLICA_SET_KEY=${MONGO_REPLICA_SET_KEY}
+      - MONGODB_USERNAME=test
+      - MONGODB_PASSWORD=${MONGO_PWD}
+      - MONGODB_DATABASE=test
+
+volumes:
+  mongodb_master_data:
+    driver: local

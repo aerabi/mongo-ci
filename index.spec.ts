@@ -21,7 +21,10 @@ const mockData = {
 const doStandardTesting = (url: Promise<MongoURL>) => {
     let client: MongoClient;
     return url
-        .then(url => MongoClient.connect(url.shortUrl))
+        .then(url => {
+            console.log(url);
+            return MongoClient.connect(url.shortUrl);
+        })
         .then(_client => client =_client)
         .then(() => load(mockData))
         .then(() => client.db('test').collections())
@@ -37,5 +40,8 @@ const doStandardTesting = (url: Promise<MongoURL>) => {
 
 describe('MongoCI', () => {
     it('standalone instance with no credentials', done => doStandardTesting(init()).finally(done));
+
+    it('3er replicaset with authentication', done => doStandardTesting(init('localhost', 27017, 'test',
+        { auth: { user: 'root', password: 'password123' } })).finally(done));
 });
 
