@@ -35,10 +35,10 @@ export function setOptions(options: MongoClientOptions = {}): void {
     _options.useNewUrlParser = true;
 }
 
-export async function load(data: Record<string, any[]>): Promise<void> {
+export async function load(data: Record<string, any[]>, dbName?: string): Promise<void> {
     return MongoClient.connect(url.shortUrl, _options)
         .then(client => {
-            const db = client.db(url.dbName);
+            const db = client.db(dbName || url.dbName);
             const queries = Object.keys(data).map(col => {
                 const collection = db.collection(col);
                 return collection.insertMany(data[col]);
