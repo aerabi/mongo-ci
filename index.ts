@@ -14,14 +14,14 @@ export class MongoURL {
 let url: MongoURL;
 let _options: MongoClientOptions = {};
 
-export async function init(host: string = 'localhost', port: number = 27017, dbName: string = 'test', options: MongoClientOptions = {}): Promise<MongoURL> {
+export async function init(host: string = 'localhost', port: number = 27017, dbName: string = 'test', options: MongoClientOptions = {}, dry = false): Promise<MongoURL> {
     setOptions(options);
     if (_options.auth) {
         url = new MongoURL(host || 'localhost', port || 27017, dbName || 'test', _options.auth.user, _options.auth.password);
     } else {
         url = new MongoURL(host || 'localhost', port || 27017, dbName || 'test');
     }
-    return url;
+    return dry ? MongoClient.connect(url.shortUrl, _options).then(() => url) : url;
 }
 
 export function setOptions(options: MongoClientOptions = {}): void {
