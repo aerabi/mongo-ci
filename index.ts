@@ -35,8 +35,9 @@ export function setOptions(options: MongoClientOptions = {}): void {
     _options.useNewUrlParser = true;
 }
 
-export async function load(data: Record<string, any[]>, dbName?: string): Promise<void> {
-    return MongoClient.connect(url.shortUrl, _options)
+export async function load(data: Record<string, any[]>, dbName?: string, mongoClient?: MongoClient): Promise<void> {
+    const getMongoClient = mongoClient ? Promise.resolve(mongoClient) : MongoClient.connect(url.shortUrl, _options);
+    return getMongoClient
         .then(client => {
             const db = client.db(dbName || url.dbName);
             const queries = Object.keys(data).map(col => {
@@ -47,14 +48,16 @@ export async function load(data: Record<string, any[]>, dbName?: string): Promis
         });
 }
 
-export async function drop(): Promise<void> {
-    return MongoClient.connect(url.shortUrl, _options)
+export async function drop(mongoClient?: MongoClient): Promise<void> {
+    const getMongoClient = mongoClient ? Promise.resolve(mongoClient) : MongoClient.connect(url.shortUrl, _options);
+    return getMongoClient
         .then(client => client.db(url.dbName).dropDatabase().then(() => client.close()));
 }
 
-export async function deleteAll(): Promise<void> {
+export async function deleteAll(mongoClient?: MongoClient): Promise<void> {
     let _client: MongoClient;
-    return MongoClient.connect(url.shortUrl, _options)
+    const getMongoClient = mongoClient ? Promise.resolve(mongoClient) : MongoClient.connect(url.shortUrl, _options);
+    return getMongoClient
         .then(client => _client = client)
         .then(client => client.db(url.dbName).collections())
         .then(cols => {
