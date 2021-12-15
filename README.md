@@ -7,14 +7,27 @@ $ npm install -D mongo-ci
 ```
 
 ## Usage
+With `async`:
 ```typescript
 import * as mongoCI from 'mongo-ci';
 
 describte('Repository Test', () => {
-  beforeAll(async (done) => mongoCI.init(process.env.MONGO_HOST || 'localhost').then(done));
-  beforeEach(async (done) => mongoCI.load(mockData).then(done));
-  afterEach(async (done) => mongoCI.deleteAll().then(done));
-  afterAll(async (done) => mongoCI.drop().then(done));
+  beforeAll(async () => mongoCI.init(process.env.MONGO_HOST || 'localhost'));
+  beforeEach(async () => mongoCI.load(mockData));
+  afterEach(async () => mongoCI.deleteAll());
+  afterAll(async () => mongoCI.drop());
+});
+```
+
+With `done`:
+```typescript
+import * as mongoCI from 'mongo-ci';
+
+describte('Repository Test', () => {
+  beforeAll(done => mongoCI.init(process.env.MONGO_HOST || 'localhost').then(done));
+  beforeEach(done => mongoCI.load(mockData).then(done));
+  afterEach(done => mongoCI.deleteAll().then(done));
+  afterAll(done => mongoCI.drop().then(done));
 });
 ```
 
