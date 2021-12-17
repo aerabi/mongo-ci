@@ -1,5 +1,6 @@
 # MongoCI
-[![codeql](https://github.com/aerabi/mongo-ci/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/aerabi/mongo-ci/actions/workflows/codeql-analysis.yml)
+[![GitLab-CI pipeline status](https://gitlab.com/aerabi/mongo-ci/badges/master/pipeline.svg)](https://gitlab.com/aerabi/mongo-ci)
+[![CodeQL job status](https://github.com/aerabi/mongo-ci/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/aerabi/mongo-ci/actions/workflows/codeql-analysis.yml)
 ![Snyk Vulnerabilities for npm package](https://img.shields.io/snyk/vulnerabilities/npm/mongo-ci)
 
 This library is created to prepare environment for testing with MongoDB, especially designed to work well with CI.
