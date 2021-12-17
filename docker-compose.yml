@@ -1,5 +1,19 @@
 version: "3.2"
 services:
+  unittest:
+    image: node:16.0.0
+    command: bash -c 'npm install && npm run test:replicaset'
+    volumes:
+      - ./:/usr/src/app
+    working_dir: /usr/src/app
+    environment:
+      - MONGODB_HOST=mongodb-primary
+      - MONGODB_ROOT_USER=root
+      - MONGODB_ROOT_PASSWORD=${MONGO_PWD}
+    depends_on:
+      - mongodb-primary
+      - mongodb-secondary
+      - mongodb-arbiter
   mongodb-primary:
     image: 'bitnami/mongodb:4.4'
     environment:

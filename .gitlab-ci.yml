@@ -9,7 +9,7 @@ test:dind:
     DOCKER_TLS_CERTDIR: ""
   services:
     - docker:dind
-  before_script:
-    - docker-compose up -d
   script:
-    - npm run test:replicaset
+    - docker-compose up --exit-code-from unittest unittest
+  after_script:
+    - docker-compose down -v

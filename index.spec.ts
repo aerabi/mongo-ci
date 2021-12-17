@@ -38,7 +38,10 @@ const doStandardTesting = (url: Promise<MongoURL>) => {
 describe('MongoCI', () => {
     it('standalone instance with no credentials', done => doStandardTesting(init()).finally(done));
 
-    it('3er replicaset with authentication', done => doStandardTesting(init('localhost', 27017, 'test',
-        { auth: { user: 'root', password: 'password123' } })).finally(done));
+    it('3er replicaset with authentication', done => {
+      const host = process.env.MONGODB_HOST || 'localhost';
+      doStandardTesting(init(host, 27017, 'test',
+        { auth: { user: 'root', password: 'password123' } })).finally(done)
+    });
 });
 
