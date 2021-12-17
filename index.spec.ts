@@ -21,21 +21,18 @@ const mockData = {
 const doStandardTesting = (url: Promise<MongoURL>) => {
     let client: MongoClient;
     return url
-        .then(url => {
-            console.log(url);
-            return MongoClient.connect(url.shortUrl);
-        })
+        .then(url => MongoClient.connect(url.shortUrl))
         .then(_client => client =_client)
         .then(() => load(mockData))
         .then(() => client.db('test').collections())
         .then(cols =>
             cols.filter(col => col.collectionName.includes('device-group'))
                 .forEach(col => col.countDocuments().then(count => expect(count).toBe(2))))
-        .then(deleteAll)
+        .then(() => deleteAll())
         .then(() => client.db('test').collections())
         .then(cols => cols.forEach(col => col.countDocuments().then(count => expect(count).toBe(0))))
-        .then(drop)
-        .catch(fail)
+        .then(() => drop())
+        .catch(fail);
 };
 
 describe('MongoCI', () => {
