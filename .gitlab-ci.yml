@@ -1,4 +1,5 @@
-include: //gitlab-ci/Auto-DevOps.gitlab-ci.yml
+include:
+  - template: Auto-DevOps.gitlab-ci.yml
 
 test:dind:
   stage: test
