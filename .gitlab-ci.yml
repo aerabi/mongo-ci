@@ -1,5 +1,4 @@
-stages:
-  - test
+include: //gitlab-ci/Auto-DevOps.gitlab-ci.yml
 
 test:dind:
   stage: test
