@@ -1,0 +1,15 @@
+stages:
+  - test
+
+test:dind:
+  stage: test
+  image: docker/compose
+  variables:
+    DOCKER_HOST: tcp://docker:2375
+    DOCKER_TLS_CERTDIR: ""
+  services:
+    - docker:dind
+  before_script:
+    - docker-compose up -d
+  script:
+    - npm run test:replicaset
