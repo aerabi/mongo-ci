@@ -1,4 +1,6 @@
-# mongo-ci
+# MongoCI
+[![codeql](https://github.com/aerabi/mongo-ci/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/aerabi/mongo-ci/actions/workflows/codeql-analysis.yml)
+
 This library is created to prepare environment for testing with MongoDB, especially designed to work well with CI.
 
 ## Installation
