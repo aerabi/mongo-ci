@@ -76,3 +76,6 @@ test:jasmine:
     - npm test
 ```
 Travis-CI configuration is similar. For further details please refer to [this document](https://docs.travis-ci.com/user/database-setup/#mongodb).
+
+## Related Literature
+- [MongoDB Unit-testing in Node.js](https://itnext.io/mongodb-unit-testing-in-node-js-5686390a6689)
