@@ -7,7 +7,9 @@
   "scripts": {
     "test": "tsc && test -e dist && test -f dist/index.js && test -f dist/index.d.ts",
     "test:standalone": "ts-node node_modules/jasmine/bin/jasmine.js --filter=\"standalone\" index.spec.ts",
-    "test:replicaset": "ts-node node_modules/jasmine/bin/jasmine.js --filter=\"replicaset\" index.spec.ts"
+    "test:replicaset": "ts-node node_modules/jasmine/bin/jasmine.js --filter=\"replicaset\" index.spec.ts",
+    "docker:test:replicaset": "docker-compose up --exit-code-from unittest unittest",
+    "docker:test:clean-up": "docker-compose down -v"
   },
   "repository": {
     "type": "git",
